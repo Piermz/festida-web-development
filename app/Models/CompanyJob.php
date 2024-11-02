@@ -35,7 +35,7 @@ class CompanyJob extends Model
     public function responsibilities(){
         return $this->hasMany(JobResponsibility::class);
     }
-    public function candidates(){
+    public function job_candidates(){
         return $this->hasMany(JobCandidate::class);
     }
 }

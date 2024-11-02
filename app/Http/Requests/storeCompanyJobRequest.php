@@ -22,17 +22,19 @@ class storeCompanyJobRequest extends FormRequest
     public function rules(): array
     {
         return [
-         'salary' => ['required','integer'],
-         'company_id' => ['required','integer'],
-         'category_id' => ['required','integer'],
-         'name' => ['required','string','max:255'],
-         'skill_level' => ['required','string','max:255'],
-         'location' => ['required','string','max:255'],
-         'type' => ['required','string','max:255'],
-         'thumbnail' => ['required','image','mimes:jpeg,png,jpg'],
-         'responsibilities' => ['required','striing','max:255'],
-         'qualifications' => ['required','string','max:255'],
-         'about' => ['required','string','max:65535'],
+            'name' => ['required', 'string', 'max:255'],
+            'type' => ['required', 'string', 'max:255'],
+            'location' => ['required', 'string', 'max:255'],
+            'skill_level' => ['required', 'string', 'max:255'],
+            'salary' => ['required', 'string', 'max:255'],
+            'about' => ['required', 'string'],
+            'thumbnail' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'company_id' => ['required', 'exists:companies,id'],
+            'category_id' => ['required', 'exists:categories,id'],
+            'responsibilities' => ['nullable', 'array'],
+            'responsibilities.*' => ['string', 'max:255'],
+            'qualifications' => ['nullable', 'array'],
+            'qualifications.*' => ['string', 'max:255'],
         ];
     }
 }
