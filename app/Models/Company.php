@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\User;
 
 class Company extends Model
 {
@@ -15,13 +16,12 @@ class Company extends Model
         'logo',
         'slug',
         'about',
-        'employeer_id',
-  
+        'employer_id',
     ];
     public function jobs(){
         return $this->hasMany(CompanyJob::class);
     }
-    public function employeer(){
-        return $this->belongsTo(user::class, 'employeer_id');
+    public function employer(){
+        return $this->belongsTo(user::class, 'employer_id');
     }
 }
