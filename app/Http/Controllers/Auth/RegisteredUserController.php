@@ -31,16 +31,32 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'account_type' => ['required', 'string', 'max:255'],
+            'occupation' => ['required'],
+            'experience' => ['required', 'numeric', 'min:0'],
+            'avatar' => ['required', 'image', 'mimes:png,jpg,jpeg'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        if($request->hasFile('avatar')) {
+            $avatarPath = $request->file('avatar')->store('avatars', 'public');
+        }
         $user = User::create([
             'name' => $request->name,
+            'occupation' => $request->occupation,
+            'experience' => $request->experience,
+            'avatar' => $avatarPath,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
+        if ($request->account_type == 'Employee') {
+            $user->assignRole('employee');
+        } else if($request->account_type == 'Employer') {
+            $user->assignRole('employer');
+        } else {
+            $user->assignRole('employee');
+        }
         event(new Registered($user));
 
         Auth::login($user);

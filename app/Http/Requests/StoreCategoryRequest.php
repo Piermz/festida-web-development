@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Category;
 
 class StoreCategoryRequest extends FormRequest
 {
@@ -22,7 +23,7 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-        'name' => ['require','string','max:255'],
+        'name' => ['required','string','max:255', 'unique:'.Category::class],
         'icon' => ['required','image','mimes:jpeg,png,jpg'],
         ];
     }

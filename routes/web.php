@@ -20,7 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
+
         route::prefix('dashboard')->name('dashboard.')->group(function(){
 
         route::middleware('can:apply job')->group(function () {
@@ -28,15 +28,15 @@ Route::middleware('auth')->group(function () {
         route::get('my-applications/{job_candidate}', [DasboardController::class, 'my_Applications_details'])->name('my.applications.details');
         });
     });
-    route::prefix('admin')->name('admin')->group(function () {
-        route::middleware('can:manage categories')->group(function () {
-            route::resource('categories', CategoryController::class);
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::middleware('can:manage categories')->group(function () {
+            Route::resource('categories', CategoryController::class);
         });
         route::middleware('can:manage company')->group(function () {
-            route::resource('companies', CompanyController::class);
+            Route::resource('company', CompanyController::class);
         });
         route::middleware('can:manage jobs')->group(function () {
-            route::resource('jobs', CompanyJobController::class);
+            route::resource('company_jobs', CompanyJobController::class);
         });
         route::middleware('can:manage applicants')->group(function () {
             route::resource('job_candidate', JobCandidateController::class);

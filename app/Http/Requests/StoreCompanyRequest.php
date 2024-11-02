@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Company;
 
 class StoreCompanyRequest extends FormRequest
 {
@@ -22,10 +23,10 @@ class StoreCompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required','string','max:255'],
+            'name' => ['required','string','max:255', 'unique:'.Company::class],
             'about' => ['required','string','max:65535'],
             'logo' => ['required','image','mimes:jpeg,png,jpg'],
-            
+
         ];
     }
 }
