@@ -1,17 +1,16 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\CompanyJobController;
-use App\Http\Controllers\DasboardController;
-use App\Http\Controllers\JobCandidateController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FrontController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DasboardController;
+use App\Http\Controllers\CompanyJobController;
+use App\Http\Controllers\JobCandidateController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [FrontController::class, 'index'])->name('front.index');
+Route::get('/details/{company_job:slug}', [FrontController::class, 'details'])->name('front.details');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
