@@ -11,6 +11,7 @@ use App\Http\Controllers\JobCandidateController;
 
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
 Route::get('/details/{company_job:slug}', [FrontController::class, 'details'])->name('front.details');
+Route::get('/category/{category:slug}', [FrontController::class, 'category'])->name('front.category');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -20,6 +21,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+        Route::middleware('can:apply job')->group(function () {
+            Route::get('/apply/success', [FrontController::class, 'success_apply'])->name('front.apply.success');
+    
+            Route::get('/apply/{company_job:slug}', [FrontController::class, 'apply'])->name('front.apply');
+            Route::post('/apply/{company_job:slug}/submit', [FrontController::class, 'apply_store'])->name('front.apply.store');
+     });
+    
+    
         route::prefix('dashboard')->name('dashboard.')->group(function(){
 
         route::middleware('can:apply job')->group(function () {
@@ -37,7 +46,7 @@ Route::middleware('auth')->group(function () {
         route::middleware('can:manage jobs')->group(function () {
             route::resource('company_jobs', CompanyJobController::class);
         });
-        route::middleware('can:manage applicants')->group(function () {
+        route::middleware('can:manage candidates')->group(function () {
             route::resource('job_candidate', JobCandidateController::class);
             route::get('candidate/{job_candidate}/resume/download', [JobCandidateController::class, 'download_File'])->name('download_resume');
         });

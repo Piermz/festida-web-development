@@ -19,7 +19,7 @@ class RolePermissionSeeder extends Seeder
             'manage categories',
             'manage company',
             'manage jobs',
-            'manage applicants',
+            'manage candidates',
             'apply job',
 
         ];
@@ -35,7 +35,7 @@ class RolePermissionSeeder extends Seeder
         $employerPermissions =[
             'manage company',
             'manage jobs',
-            'manage applicants',
+            'manage candidates',
         ];
 
         $employerRole->syncPermissions($employerPermissions);

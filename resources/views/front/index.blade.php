@@ -25,10 +25,22 @@
                 <a href="index.html" class="transition-all duration-300 hover:font-semibold hover:text-[#FF6B2C] font-medium text-white">About</a>
             </li>
         </ul>
+        @guest
         <div class="flex items-center gap-3">
-            <a href="signin.html" class="rounded-full border border-white p-[14px_24px] font-semibold text-white">Sign In</a>
-            <a href="signup.html" class="rounded-full p-[14px_24px] bg-[#FF6B2C] font-semibold text-white hover:shadow-[0_10px_20px_0_#FF6B2C66] transition-all duration-300">Sign up</a>
+            <a href="{{route('login')}}" class="rounded-full border border-white p-[14px_24px] font-semibold text-white">Sign In</a>
+            <a href="{{route('register')}}" class="rounded-full p-[14px_24px] bg-[#FF6B2C] font-semibold text-white hover:shadow-[0_10px_20px_0_#FF6B2C66] transition-all duration-300">Sign up</a>
+        </div>   
+        @endguest
+        @auth
+        <div class="flex items-center gap-4">
+            <p class="username font-medium text-white">Hi, {{Auth::user()->name}}</p>
+            <div class="w-[52px] h-[52px] flex shrink-0 rounded-full overflow-hidden">
+                <a href="{{route('dashboard')}}">
+                    <img src="{{Storage::url(Auth::user()->avatar)}}" class="object-cover w-full h-full" alt="photo">
+                </a>
+            </div>
         </div>
+        @endauth
     </nav>
     <header class="container max-w-[1130px] mx-auto flex items-center justify-between gap-[50px] mt-[70px]">
         <div class="flex flex-col justify-center w-full gap-10">
@@ -59,118 +71,24 @@
     <section id="Categories" class="container max-w-[1130px] mx-auto flex flex-col gap-[30px] mt-[70px]">
         <h2 class="font-bold text-2xl leading-[36px] text-white">Browse by <br> Job Categories</h2>
         <div class="categories-container grid grid-cols-4 gap-[30px]">
-            <a href="" class="card">
+            @forelse ($catregories as $category)
+            <a href="{{route('front.category', $category->slug)}}" class="card">
                 <div class="flex flex-col rounded-[20px] border border-[#E8E4F8] p-5 gap-[30px] bg-white shadow-[0_8px_30px_0_#0E01400D] hover:ring-2 hover:ring-[#FF6B2C] transition-all duration-300">
                     <div class="w-[60px] h-[60px] flex shrink-0">
                         <img src="assets/icons/Web Development 1-2.png" class="object-contain" alt="icon">
                     </div>
                     <div class="flex items-center justify-between gap-4">
                         <div class="flex flex-col">
-                            <p class="font-bold text-lg leading-[27px]">Product Design</p>
-                            <p class="font-medium">182 Jobs</p>
+                            <p class="font-bold text-lg leading-[27px]">{{$category->name}}</p>
+                            <p class="font-medium">{{$category->jobs->count()}}</p>
                         </div>
                         <img src="assets/icons/arrow-circle-right.svg" alt="icon">
                     </div>
                 </div>
             </a>
-            <a href="" class="card">
-                <div class="flex flex-col rounded-[20px] border border-[#E8E4F8] p-5 gap-[30px] bg-white shadow-[0_8px_30px_0_#0E01400D] hover:ring-2 hover:ring-[#FF6B2C] transition-all duration-300">
-                    <div class="w-[60px] h-[60px] flex shrink-0">
-                        <img src="assets/icons/Web Development 1-1.png" class="object-contain" alt="icon">
-                    </div>
-                    <div class="flex items-center justify-between gap-4">
-                        <div class="flex flex-col">
-                            <p class="font-bold text-lg leading-[27px]">Marketing</p>
-                            <p class="font-medium">182 Jobs</p>
-                        </div>
-                        <img src="assets/icons/arrow-circle-right.svg" alt="icon">
-                    </div>
-                </div>
-            </a>
-            <a href="" class="card">
-                <div class="flex flex-col rounded-[20px] border border-[#E8E4F8] p-5 gap-[30px] bg-white shadow-[0_8px_30px_0_#0E01400D] hover:ring-2 hover:ring-[#FF6B2C] transition-all duration-300">
-                    <div class="w-[60px] h-[60px] flex shrink-0">
-                        <img src="assets/icons/Web Development 1.png" class="object-contain" alt="icon">
-                    </div>
-                    <div class="flex items-center justify-between gap-4">
-                        <div class="flex flex-col">
-                            <p class="font-bold text-lg leading-[27px]">Development</p>
-                            <p class="font-medium">182 Jobs</p>
-                        </div>
-                        <img src="assets/icons/arrow-circle-right.svg" alt="icon">
-                    </div>
-                </div>
-            </a>
-            <a href="" class="card">
-                <div class="flex flex-col rounded-[20px] border border-[#E8E4F8] p-5 gap-[30px] bg-white shadow-[0_8px_30px_0_#0E01400D] hover:ring-2 hover:ring-[#FF6B2C] transition-all duration-300">
-                    <div class="w-[60px] h-[60px] flex shrink-0">
-                        <img src="assets/icons/Web Development 1-4.png" class="object-contain" alt="icon">
-                    </div>
-                    <div class="flex items-center justify-between gap-4">
-                        <div class="flex flex-col">
-                            <p class="font-bold text-lg leading-[27px]">Software QA</p>
-                            <p class="font-medium">182 Jobs</p>
-                        </div>
-                        <img src="assets/icons/arrow-circle-right.svg" alt="icon">
-                    </div>
-                </div>
-            </a>
-            <a href="" class="card">
-                <div class="flex flex-col rounded-[20px] border border-[#E8E4F8] p-5 gap-[30px] bg-white shadow-[0_8px_30px_0_#0E01400D] hover:ring-2 hover:ring-[#FF6B2C] transition-all duration-300">
-                    <div class="w-[60px] h-[60px] flex shrink-0">
-                        <img src="assets/icons/Web Development 1-2.png" class="object-contain" alt="icon">
-                    </div>
-                    <div class="flex items-center justify-between gap-4">
-                        <div class="flex flex-col">
-                            <p class="font-bold text-lg leading-[27px]">Copywriting</p>
-                            <p class="font-medium">182 Jobs</p>
-                        </div>
-                        <img src="assets/icons/arrow-circle-right.svg" alt="icon">
-                    </div>
-                </div>
-            </a>
-            <a href="" class="card">
-                <div class="flex flex-col rounded-[20px] border border-[#E8E4F8] p-5 gap-[30px] bg-white shadow-[0_8px_30px_0_#0E01400D] hover:ring-2 hover:ring-[#FF6B2C] transition-all duration-300">
-                    <div class="w-[60px] h-[60px] flex shrink-0">
-                        <img src="assets/icons/Web Development 1-1.png" class="object-contain" alt="icon">
-                    </div>
-                    <div class="flex items-center justify-between gap-4">
-                        <div class="flex flex-col">
-                            <p class="font-bold text-lg leading-[27px]">Blockchain</p>
-                            <p class="font-medium">182 Jobs</p>
-                        </div>
-                        <img src="assets/icons/arrow-circle-right.svg" alt="icon">
-                    </div>
-                </div>
-            </a>
-            <a href="" class="card">
-                <div class="flex flex-col rounded-[20px] border border-[#E8E4F8] p-5 gap-[30px] bg-white shadow-[0_8px_30px_0_#0E01400D] hover:ring-2 hover:ring-[#FF6B2C] transition-all duration-300">
-                    <div class="w-[60px] h-[60px] flex shrink-0">
-                        <img src="assets/icons/Web Development 1.png" class="object-contain" alt="icon">
-                    </div>
-                    <div class="flex items-center justify-between gap-4">
-                        <div class="flex flex-col">
-                            <p class="font-bold text-lg leading-[27px]">Virtual Assistant</p>
-                            <p class="font-medium">182 Jobs</p>
-                        </div>
-                        <img src="assets/icons/arrow-circle-right.svg" alt="icon">
-                    </div>
-                </div>
-            </a>
-            <a href="" class="card">
-                <div class="flex flex-col rounded-[20px] border border-[#E8E4F8] p-5 gap-[30px] bg-white shadow-[0_8px_30px_0_#0E01400D] hover:ring-2 hover:ring-[#FF6B2C] transition-all duration-300">
-                    <div class="w-[60px] h-[60px] flex shrink-0">
-                        <img src="assets/icons/Web Development 1-4.png" class="object-contain" alt="icon">
-                    </div>
-                    <div class="flex items-center justify-between gap-4">
-                        <div class="flex flex-col">
-                            <p class="font-bold text-lg leading-[27px]">Data Science</p>
-                            <p class="font-medium">182 Jobs</p>
-                        </div>
-                        <img src="assets/icons/arrow-circle-right.svg" alt="icon">
-                    </div>
-                </div>
-            </a>
+            @empty
+                
+            @endforelse
         </div>
     </section>
     <section id="Latest" class="flex flex-col gap-[30px] mt-[70px]">

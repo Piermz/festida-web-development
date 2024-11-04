@@ -36,7 +36,7 @@ class JobCandidateController extends Controller
      */
     public function show(JobCandidate $jobCandidate)
     {
-        //
+        return view('admin.job_candidates.show', compact('jobCandidate'));
     }
 
     /**
