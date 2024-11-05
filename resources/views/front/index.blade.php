@@ -4,7 +4,7 @@
 <body class="font-poppins text-blue-900 bg-gray-100">
     <x-nav/>
 
-    <header class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+    <header class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-fu sm:py-24">
         <div class="lg:grid lg:grid-cols-12 lg:gap-8">
             <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
                 <div class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-800 mb-6">
@@ -43,35 +43,35 @@
         </div>
     </header>
 
-    <section id="Categories" class="bg-gradient-to-br from-blue-900 to-indigo-800 py-16 sm:py-24">
+    <section id="Categories" class="bg-gradient-to-br from-blue-900 to-indigo-800 py-16 w-full sm:py-24">
         <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                <h2 class="text-4xl font-extrabold text-white sm:text-5xl">
                     Jelajahi Kategori Pekerjaan
                 </h2>
-                <p class="mt-3 max-w-2xl mx-auto text-xl text-blue-200 sm:mt-4">
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-blue-200 sm:text-2xl">
                     Temukan peluang karir di berbagai industri
                 </p>
             </div>
-            <div class="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div class="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 @forelse ($catregories as $category)
-                    <div class="bg-white rounded-[30px] shadow-xl overflow-hidden transform transition duration-300">
+                    <div class="bg-white rounded-3xl shadow-2xl overflow-hidden transform transition duration-300 hover:scale-105">
                         <div class="p-8 bg-gradient-to-r from-blue-100 to-indigo-100">
-                            <img class="h-24 w-24 mx-auto object-contain" src="{{ Storage::url($category->icon) }}" alt="{{ $category->name }}">
+                            <img class="h-28 w-28 mx-auto object-contain" src="{{ Storage::url($category->icon) }}" alt="{{ $category->name }}">
                             <h3 class="mt-6 text-2xl font-bold text-center text-indigo-900">{{ $category->name }}</h3>
                         </div>
                         <div class="p-6">
                             <p class="text-lg text-gray-600 text-center mb-4">{{ $category->jobs->count() }} pekerjaan tersedia</p>
-                            <a href="{{ route('front.category', $category->slug) }}" class="block text-center mt-4 text-indigo-600 hover:text-indigo-500 text-lg font-semibold">
+                            <a href="{{ route('front.category', $category->slug) }}" class="block text-center mt-4 text-indigo-600 hover:text-indigo-500 text-lg font-semibold transition duration-300 hover:underline">
                                 Lihat semua pekerjaan
-                                <svg class="inline-block ml-2 w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <svg class="inline-block ml-2 w-6 h-6 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                                 </svg>
                             </a>
                         </div>
                     </div>
                 @empty
-                    <p class="text-white text-center col-span-full text-xl">Belum ada kategori yang tersedia saat ini.</p>
+                    <p class="text-white text-center col-span-full text-2xl">Belum ada kategori yang tersedia saat ini.</p>
                 @endforelse
             </div>
         </div>
