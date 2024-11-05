@@ -125,7 +125,7 @@
                         @endif
 
                         <div class="flex flex-row items-center gap-x-3">
-                            <a href="{{ route('admin.job_candidates.show', $candidate) }}" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
+                            <a href="{{route('admin.job_candidate.show', $companyJob)}}" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
                                 Details
                             </a>
                         </div>

@@ -21,18 +21,20 @@ class RolePermissionSeeder extends Seeder
             'manage jobs',
             'manage candidates',
             'apply job',
-
         ];
+
         foreach ($permissions as $permission) {
             Permission::firstOrCreate([
                 'name' => $permission
             ]);
         }
+
+        // Employer Role and Permissions
         $employerRole = Role::firstOrCreate([
             'name' => 'employer',
         ]);
 
-        $employerPermissions =[
+        $employerPermissions = [
             'manage company',
             'manage jobs',
             'manage candidates',
@@ -40,20 +42,27 @@ class RolePermissionSeeder extends Seeder
 
         $employerRole->syncPermissions($employerPermissions);
 
+        // Employee Role and Permissions
         $employeeRole = Role::firstOrCreate([
             'name' => 'employee',
-        ]); 
+        ]);
 
-        $employeePermissions =[
+        $employeePermissions = [
             'apply job',
         ];
 
-        $employeeRole->syncPermissions($employerPermissions);
+        // Fix: Changed from $employerPermissions to $employeePermissions
+        $employeeRole->syncPermissions($employeePermissions);
 
+        // Super Admin Role
         $superAdminRole = Role::firstOrCreate([
             'name' => 'super_admin',
         ]);
 
+        // Super Admin gets all permissions
+        $superAdminRole->syncPermissions($permissions);
+
+        // Create Super Admin User
         $user = User::create([
             'name' => 'Super Admin',
             'email' => 'super@admin.com',

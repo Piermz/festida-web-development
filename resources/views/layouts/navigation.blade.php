@@ -33,7 +33,7 @@
                         {{ __('My Listing') }}
                     </x-nav-link>
                     @endcan
-                    @can('apply jobs')
+                    @can('apply job')
                     <x-nav-link :href="route('dashboard.my.applications')" :active="request()->routeIs('dashboard.my.applications')">
                         {{ __('My Job Applications') }}
                     </x-nav-link>
