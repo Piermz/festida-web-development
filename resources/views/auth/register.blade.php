@@ -109,14 +109,12 @@
                                     <div class="grid grid-cols-2 gap-4">
                                         <label
                                             class="flex bg-orange-600 text-white font-medium items-center justify-center p-4 border rounded-lg cursor-pointer hover:bg-orange-900 transition duration-300">
-                                            <input type="radio" name="account_type" value="employee"
-                                                class="mr-2 text-indigo-600 focus:ring-indigo-500">
+                                            <input type="radio" name="account_type" value="Employee" id="Employee"  required>
                                             <span class="text-sm">Calon Magang</span>
                                         </label>
                                         <label
                                             class="flex bg-indigo-600 text-white font-medium items-center justify-center p-4 border rounded-lg cursor-pointer hover:bg-indigo-900 transition duration-300">
-                                            <input type="radio" name="account_type" value="employer"
-                                                class="mr-2 text-indigo-600 focus:ring-indigo-500">
+                                            <input type="radio" name="account_type" value="Employer" id="Employer"  required>
                                             <span class="text-sm">Penyedia Magang</span>
                                         </label>
                                     </div>
