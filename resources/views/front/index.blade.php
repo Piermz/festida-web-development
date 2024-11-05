@@ -1,129 +1,156 @@
 @extends('layouts.master')
+
 @section('content')
-<body class="font-poppins text-[#0E0140] pb-[100px] overflow-x-hidden">
-    <div id="page-background" class="absolute h-[1330px] w-full top-0 -z-10 overflow-hidden">
-        <img src="assets/backgrounds/Group 2009.png" class="w-full h-full object-fill" alt="background">
-    </div>
-  <x-nav/>
-    <header class="container max-w-[1130px] mx-auto flex items-center justify-between gap-[50px] mt-[70px]">
-        <div class="flex flex-col justify-center w-full gap-10">
-            <div class="badge flex items-center rounded-full py-2 pl-4 pr-6 gap-[10px] bg-white w-fit">
-                <div class="flex shrink-0">
-                    <img src="assets/icons/crown-orange.svg" alt="icon">
+<body class="font-poppins text-blue-900 bg-gray-100">
+    <x-nav/>
+
+    <header class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+            <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
+                <div class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-800 mb-6">
+                    <svg class="w-5 h-5 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zm7-10a1 1 0 01.707.293l.707.707L15 4.414A2 2 0 0116.414 3L14 .586A2 2 0 0112.586 2l-.707-.707A1 1 0 0113 1z" clip-rule="evenodd" />
+                    </svg>
+                    Platform Magang Terpercaya
                 </div>
-                <p class="font-semibold text-sm leading-[21px] text-[#0C0039]">Helped 5 Million People Worldwide Grow Career</p>
-            </div>
-            <div class="flex flex-col gap-4">
-                <h1 class="font-black text-[60px] leading-[70px] text-white">We Help You<br>Get Dream Job</h1>
-                <p class="text-lg leading-[34px] text-white">Must trusted platform to build new career and<br>get an happy job better than befooore</p>
-            </div>
-            <form method="GET"action="{{route('front.search')}}" class="flex items-center bg-white rounded-full pl-6 h-fit focus-within:ring-2 focus-within:ring-[#FF6B2C] transition-all duration-300">
-                @csrf
-                <div class="flex items-center w-full mr-6 gap-[10px]">
-                    <div class="flex shrink-0">
-                        <img src="assets/icons/search-normal.svg" alt="icon">
-                    </div>
-                    <input name="keyword" type="text" autocomplete="off" class="appearance-none w-full outline-none font-semibold placeholder:font-normal placeholder:text-[#0E0140] focus:outline-none" placeholder="Quick search your dream job...">
+                <h1 class="mt-4 text-4xl tracking-tight font-extrabold text-blue-900 sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl">
+                    <span class="block">Temukan magang</span>
+                    <span class="block text-blue-600">Yang membuka peluang</span>
+                </h1>
+                <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+                    Temukan program magang yang sesuai dengan minat dan jurusan Anda untuk memulai karir profesional
+                </p>
+                <div class="mt-8 sm:mt-12">
+                    <form action="{{ route('front.search') }}" method="GET" class="sm:max-w-xl sm:mx-auto lg:mx-0">
+                        @csrf
+                        <div class="sm:flex">
+                            <div class="min-w-0 flex-1">
+                                <label for="keyword" class="sr-only">Cari magang</label>
+                                <input id="keyword" name="keyword" type="text" placeholder="Cari program magang sesuai bidangmu..." class="block w-full px-4 py-3 rounded-md border border-gray-300 text-base leading-5 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div class="mt-3 sm:mt-0 sm:ml-3">
+                                <button type="submit" class="block w-full py-3 px-4 rounded-md shadow bg-blue-600 text-white font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-gray-100">
+                                    Cari Magang
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <button type="submit" class="rounded-full py-5 px-[30px] bg-[#FF6B2C] font-semibold text-white text-nowrap hover:shadow-[0_10px_20px_0_#FF6B2C66] transition-all duration-300">Explore Now</button>
-            </form>
-        </div>
-        <div class="flex shrink-0 w-[548px]">
-            <img src="assets/backgrounds/hero illustration v2.png" class="object-contain" alt="banner">
+            </div>
+            <div class="mt-12 relative sm:mx-auto lg:mt-0 lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
+                <img class="w-full h-full object-contain" src="{{ asset('assets/backgrounds/work.png') }}" alt="Hero Illustration">
+            </div>
         </div>
     </header>
-    <section id="Categories" class="container max-w-[1130px] mx-auto flex flex-col gap-[30px] mt-[70px]">
-        <h2 class="font-bold text-2xl leading-[36px] text-white">Browse by <br> Job Categories</h2>
-        <div class="categories-container grid grid-cols-4 gap-[30px]">
-            @forelse ($catregories as $category)
-            <a href="{{route('front.category', $category->slug)}}" class="card">
-                <div class="flex flex-col rounded-[20px] border border-[#E8E4F8] p-5 gap-[30px] bg-white shadow-[0_8px_30px_0_#0E01400D] hover:ring-2 hover:ring-[#FF6B2C] transition-all duration-300">
-                    <div class="w-[60px] h-[60px] flex shrink-0">
-                        <img src="assets/icons/Web Development 1-2.png" class="object-contain" alt="icon">
-                    </div>
-                    <div class="flex items-center justify-between gap-4">
-                        <div class="flex flex-col">
-                            <p class="font-bold text-lg leading-[27px]">{{$category->name}}</p>
-                            <p class="font-medium">{{$category->jobs->count()}}</p>
+
+    <section id="Categories" class="bg-gradient-to-br from-blue-900 to-indigo-800 py-16 sm:py-24">
+        <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                    Jelajahi Kategori Pekerjaan
+                </h2>
+                <p class="mt-3 max-w-2xl mx-auto text-xl text-blue-200 sm:mt-4">
+                    Temukan peluang karir di berbagai industri
+                </p>
+            </div>
+            <div class="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                @forelse ($catregories as $category)
+                    <a href="{{ route('front.category', $category->slug) }}" class="group">
+                        <div class="flex flex-col rounded-lg shadow-lg overflow-hidden bg-white hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                            <div class="flex-shrink-0 bg-gradient-to-r from-blue-100 to-indigo-100 p-6">
+                                <img class="h-16 w-16 mx-auto object-contain" src="{{ Storage::url($category->icon)}}" alt="{{ $category->name }}">
+                            </div>
+                            <div class="flex-1 bg-white p-6 flex flex-col justify-between">
+                                <div class="flex-1">
+                                    <p class="text-xl font-bold text-indigo-900">{{ $category->name }}</p>
+                                    <p class="mt-3 text-base text-gray-600">{{ $category->jobs->count() }} lowongan tersedia</p>
+                                </div>
+                                <div class="mt-4 flex flex-wrap items-center gap-2">
+                                    @if($category->jobs->isNotEmpty())
+                                        <div class="flex items-center">
+                                            <span class="text-sm text-gray-600">{{ $category->jobs->first()->type }}</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            {{-- <span class="text-sm text-gray-600">Rp {{  }}/bulan</span> --}}
+                                        </div>
+                                        <div class="flex items-center">
+                                            <span class="text-sm text-gray-600">{{ $category->jobs->first()->location }}</span>
+                                        </div>
+                                    @else
+                                        <span class="text-sm text-gray-600">Belum ada informasi pekerjaan</span>
+                                    @endif
+                                </div>
+                                <div class="mt-6 flex items-center text-indigo-600 group-hover:text-indigo-500">
+                                    <span class="text-sm font-medium">Jelajahi</span>
+                                    <svg class="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </div>
                         </div>
-                        <img src="assets/icons/arrow-circle-right.svg" alt="icon">
-                    </div>
-                </div>
-            </a>
-            @empty
-                
-            @endforelse
+                    </a>
+                @empty
+                    <p class="text-white text-center col-span-full">Belum ada kategori yang tersedia saat ini.</p>
+                @endforelse
+            </div>
         </div>
     </section>
-    <section id="Latest" class="flex flex-col gap-[30px] mt-[70px]">
-        <h2 class="container max-w-[1130px] mx-auto font-bold text-2xl leading-[36px]">Latest Jobs <br> Get Them Now</h2>
-        <div class="main-carousel *:!overflow-visible">
 
-            @forelse($jobs as $job)
-            <div class="card first-of-type:pl-[calc((100%-1130px)/2)] last-of-type:pr-[calc((100%-1130px)/2)] px-[15px] py-[2px]">
-                <div class="w-[300px] flex flex-col shrink-0 rounded-[20px] border border-[#E8E4F8] p-5 gap-5 bg-white shadow-[0_8px_30px_0_#0E01400D] hover:ring-2 hover:ring-[#FF6B2C] transition-all duration-300">
-                    <div class="company-info flex items-center gap-3">
-                        <div class="w-[70px] flex shrink-0 overflow-hidden">
-                            <img src="{{Storage::url($job->company->logo)}}" class="object-contain w-full h-full" alt="logo">
+    <section id="Latest" class="py-16 sm:py-24">
+        <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-blue-900 sm:text-4xl mb-8">
+                Latest Jobs
+            </h2>
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                @forelse($jobs as $job)
+                    <div class="flex flex-col rounded-lg shadow-lg overflow-hidden">
+                        <div class="flex-shrink-0">
+                            <img class="h-48 w-full object-cover" src="{{ Storage::url($job->company->logo) }}" alt="{{ $job->company->name }}">
                         </div>
-                        <div class="flex flex-col">
-                            <p class="font-semibold">{{$job->company->name}}</p>
-                            <p class="text-sm leading-[21px]">Posted at {{$job->company->created_at->format('M d, Y')}}</p>
+                        <div class="flex-1 bg-white p-6 flex flex-col justify-between">
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-blue-600">
+                                    {{ $job->company->name }}
+                                </p>
+                                <a href="{{ route('front.details', $job->slug) }}" class="block mt-2">
+                                    <p class="text-xl font-semibold text-blue-900">{{ $job->name }}</p>
+                                    <p class="mt-3 text-base text-gray-500">{{ Str::limit($job->description, 100) }}</p>
+                                </a>
+                            </div>
+                            <div class="mt-6 flex items-center">
+                                <div class="flex-shrink-0">
+                                    <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                        {{ $job->type }}
+                                    </span>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">
+                                        Rp {{ number_format($job->salary, 0, ',', '.') }}/month
+                                    </p>
+                                    <p class="text-sm text-gray-500">
+                                        {{ $job->location }}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <hr class="border-[#E8E4F8]">
-                    <p class="job-title font-bold text-lg leading-[27px] h-[54px] flex shrink-0 line-clamp-2">{{$job->name}}</p>
-                    <div class="job-info flex flex-col gap-[14px]">
-                        <div class="flex items-center gap-[6px]">
-                            <div class="flex shrink-0 w-6 h-6">
-                                <img src="assets/icons/note-favorite-orange.svg" alt="icon">
-                            </div>
-                            <p class="font-medium">{{$job->type}}</p>
-                        </div>
-                        <div class="flex items-center gap-[6px]">
-                            <div class="flex shrink-0 w-6 h-6">
-                                <img src="assets/icons/moneys-cyan.svg" alt="icon">
-                            </div>
-                            <p class="font-medium">Guaranteed</p>
-                        </div>
-                        <div class="flex items-center gap-[6px]">
-                            <div class="flex shrink-0 w-6 h-6">
-                                <img src="assets/icons/location-purple.svg" alt="icon">
-                            </div>
-                            <p class="font-medium">{{$job->location}}</p>
-                        </div>
-                    </div>
-                    <hr class="border-[#E8E4F8]">
-                    <div class="flex items-center justify-between">
-                        <div class="flex flex-col gap-[2px]">
-                            <p class="font-bold text-lg leading-[27px]">Rp {{ number_format($job->salary, 0, ',', '.') }}</p>
-                            <p class="text-sm leading-[21px]">/month</p>
-                        </div>
-                        <a href="{{route('front.details', $job->slug)}}" class="rounded-full p-[14px_24px] bg-[#FF6B2C] font-semibold text-white hover:shadow-[0_10px_20px_0_#FF6B2C66] transition-all duration-300">Details</a>
-                    </div>
-                </div>
+                @empty
+                    <p class="text-gray-500 text-center col-span-full">No new job listings available at the moment.</p>
+                @endforelse
             </div>
-            @empty
-            <p>Belum ada data job baru</p>
-            @endforelse
         </div>
     </section>
 </body>
 @endsection
 
+@push('after-styles')
+<style>
+    /* Add any custom styles here */
+</style>
+@endpush
+
 @push('after-scripts')
-
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<!-- JavaScript -->
-<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-
 <script>
-    $('.main-carousel').flickity({
-        // options
-        cellAlign: 'left',
-        contain: true,
-        prevNextButtons: false,
-        pageDots: false
-    });
+    // Add any custom scripts here
 </script>
 @endpush
