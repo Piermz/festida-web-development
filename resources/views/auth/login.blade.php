@@ -1,77 +1,90 @@
 @extends('layouts.master')
 @section('content')
-	<body class="font-poppins text-[#0E0140]">
-		<main class="min-h-dvh">
-			<div id="left-side" class="fixed top-0 left-0 h-dvh w-[640px] outline outline-1 outline-[#E8E4F8]">
-				<img src="{{asset('assets/backgrounds/Smiley Woman on Floor.png')}}" class="size-full object-cover" alt="background image" />
-				<div class="absolute bottom-0 flex p-5 flex-col gap-4 max-w-[590px] mx-[30px] mb-[30px] rounded-[20px] outline outline-1 outline-[#E8E4F8] bg-white shadow-[0_8px_30px_0_#0E01400D]">
-					<p class="text-base leading-[32px] font-semibold">
-						Berkat Jobank saya bisa bekerja dari rumah dengan santai tanpa harus macet-macetan. Seluruh lokernya juga aman bebas dari penipuan yang sering terjadi saat ini di seluruh dunia.
-					</p>
-					<div class="flex justify-between items-center">
-						<div class="flex items-center gap-[14px]">
-							<div class="flex shrink-0 size-[60px] rounded-full overflow-hidden">
-								<img src="{{asset('assets/photos/photo2.png')}}" class="object-cover w-full h-full" alt="profile picture" />
-							</div>
-							<div>
-								<p class="text-base font-semibold">Shayna Angga</p>
-								<p class="text-sm leading-[21px]">Programmer</p>
-							</div>
-						</div>
-						<div class="flex items-center gap-[2px]">
-							<div class="flex shrink-0 size-6">
-								<img src="{{asset('assets/icons/Star.svg')}}" alt="star" />
-							</div>
-							<div class="flex shrink-0 size-6">
-								<img src="{{asset('assets/icons/Star.svg')}}" alt="star" />
-							</div>
-							<div class="flex shrink-0 size-6">
-								<img src="{{asset('assets/icons/Star.svg')}}" alt="star" />
-							</div>
-							<div class="flex shrink-0 size-6">
-								<img src="{{asset('assets/icons/Star.svg')}}" alt="star" />
-							</div>
-							<div class="flex shrink-0 size-6">
-								<img src="{{asset('assets/icons/Star.svg')}}" alt="star" />
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<section id="right-side" class="w-dvw h-dvh flex flex-col items-center justify-center pl-[640px] py-[140px]">
-				<a href="index.html" class="flex shrink-0 justify-start w-[500px] h-[10] mb-[70px]">
-					<img src="{{asset('assets/logos/Logo-black.svg')}}" class="object-contain" alt="logo" />
-        </a>
-				<form id="form-signin" method="POST" action="{{route('login')}}" class="w-[500px] flex flex-col gap-[30px]">
+
+<body class="font-poppins text-[#0E0140] bg-gradient-to-br from-blue-50 to-indigo-100">
+    <main class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl w-full flex bg-white rounded-xl shadow-2xl overflow-hidden">
+            <!-- Sisi kiri - Gambar -->
+            <div class="hidden lg:block lg:w-1/2 bg-cover bg-center" style="background-image: url('{{ asset('assets/backgrounds/macbook-air-on-desk.jpg') }}');">
+            </div>
+
+            <!-- Sisi kanan - Formulir Masuk -->
+            <div class="w-full lg:w-1/2 p-8 md:p-12 space-y-8">
+                <div class="text-center">
+                    <img class="mx-auto h-12 mb-6 w-auto" src="{{ asset('assets/logos/intern.png') }}" alt="Logo InternPortal">
+                    <h2 class="text-3xl font-extrabold text-gray-900">
+                        Selamat Datang Kembali!
+                    </h2>
+                    <p class="mt-2 text-sm text-gray-600">
+                        Masuk ke akun InternPortal.id Anda
+                    </p>
+                </div>
+
+                <form class="mt-8 space-y-6" id="form-signin" method="POST" action="{{ route('login') }}">
                     @csrf
-					<h1 class="text-[26px] leading-[39px] font-bold">Sign In</h1>
-					<div class="flex flex-col gap-2">
-						<label for="email" class="text-base font-semibold">Email Address</label>
-						<div class="flex items-center rounded-full py-[14px] px-[24px] gap-[10px] ring-1 ring-[#0E0140] focus-within:ring-2 focus-within:ring-[#FF6B2C] transition-all duration-300">
-							<div class="flex shrink-0 size-6">
-								<img src="{{asset('assets/icons/sms.svg')}}" alt="email icon" />
-							</div>
-							<input type="email" id="email" name="email" class="w-full focus:outline-none font-semibold placeholder:font-normal placeholder:text-[#0E0140]" placeholder="Write your email address" required />
-						</div>
-					</div>
-					<div class="flex flex-col gap-2">
-						<label for="password" class="text-base font-semibold">Password</label>
-						<div class="flex items-center rounded-full py-[14px] px-[24px] gap-[10px] ring-1 ring-[#0E0140] focus-within:ring-2 focus-within:ring-[#FF6B2C] transition-all duration-300">
-							<div class="flex shrink-0 size-6">
-								<img src="{{asset('assets/icons/lock.svg')}}" alt="password icon" />
-							</div>
-							<input type="password" id="password" name="password" class="w-full focus:outline-none font-semibold placeholder:font-normal placeholder:text-[#0E0140]" placeholder="Write your password" required />
-						</div>
-						<a href="#" class="text-sm leading-[21px] hover:underline">Forgot Password</a>
-					</div>
-					<div class="flex flex-col gap-3">
-						<button type="submit" class="flex items-center justify-center py-[14px] px-[30px] bg-[#FF6B2C] font-semibold text-white rounded-full hover:shadow-[0px_10px_20px_0px_#FF6B2C66] transition-all duration-300">
-							Sign In to My Account
-						</button>
-						<a href="{{route('register')}}" class="flex items-center justify-center py-[14px] px-[30px] font-semibold text-[#0E0140] outline outline-1 outline-[#0E0140] rounded-full">Create New Account</a>
-					</div>
-				</form>
-			</section>
-		</main>
-	</body>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Alamat Email</label>
+                            <div class="mt-1 relative rounded-md shadow-sm">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                    </svg>
+                                </div>
+                                <input id="email" name="email" type="email" autocomplete="email" required class="appearance-none block w-full px-3 py-3 pl-10 border border-gray-300 rounded-md placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm" placeholder="Masukkan email Anda">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-gray-700">Kata Sandi</label>
+                            <div class="mt-1 relative rounded-md shadow-sm">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <input id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none block w-full px-3 py-3 pl-10 border border-gray-300 rounded-md placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm" placeholder="Masukkan kata sandi Anda">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded transition duration-150 ease-in-out">
+                            <label for="remember-me" class="ml-2 block text-sm text-gray-900">
+                                Ingat saya
+                            </label>
+                        </div>
+
+                        <div class="text-sm">
+                            <a href="{{ route('password.request') }}" class="font-medium text-indigo-600 hover:text-indigo-500 transition duration-150 ease-in-out">
+                                Lupa kata sandi?
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out transform hover:scale-105">
+                            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                                <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            Masuk
+                        </button>
+                    </div>
+                </form>
+
+                <div class="mt-6 text-center">
+                    <p class="text-sm text-gray-600">
+                        Belum punya akun?
+                        <a href="{{ route('register') }}" class="font-medium text-indigo-600 hover:text-indigo-500 transition duration-150 ease-in-out">
+                            Daftar sekarang
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
 @endsection
