@@ -15,7 +15,7 @@ class FrontController extends Controller
     //
     public function index()
     {
-        $catregories = Category::all();
+        $catregories = Category::withCount('jobs')->paginate(4);
         $jobs = CompanyJob::with(['category', 'company'])->latest()->take(6)->get();
         return view('front.index', compact('catregories', 'jobs'));
     }
@@ -26,7 +26,7 @@ class FrontController extends Controller
             ->InRandomOrder()
             ->take(4)
             ->get();
-        
+
         return view('front.details', compact('companyJob', 'jobs'));
     }
     public function apply(CompanyJob $companyJob) {
@@ -34,28 +34,28 @@ class FrontController extends Controller
     }
     public function apply_store(StoreApplyJobRequest $request, CompanyJob $companyJob){
         $user = Auth::user();
-    
+
         $hasApplied = JobCandidate::where('company_job_id', $companyJob->id)
             ->where('candidate_id', $user->id)->first();
         if($hasApplied){
             return redirect()->back()->withErrors(['applied' => 'Failed! Anda sudah apply sebelumnya.']);
         }
-    
+
         DB::transaction(function() use ($request, $user, $companyJob) {
             $validated = $request->validated();
-    
+
             if($request->hasFile('resume')){
                 $resumePath = $request->file('resume')->store('resumes/' . date('Y/m/d'), 'public');
                 $validated['resume'] = $resumePath;
             }
-    
+
             $validated['candidate_id'] = $user->id;
             $validated['is_hired'] = false;
             $validated['company_job_id'] = $companyJob->id;
-    
+
             $newData = JobCandidate::create($validated);
         });
-    
+
         return redirect()->route('front.apply.success');
     }
     public function success_apply() {

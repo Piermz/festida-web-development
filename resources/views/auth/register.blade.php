@@ -104,23 +104,59 @@
                                 </div>
 
                                 <!-- Tipe Akun -->
-                                <div>
+                                <div x-data="{ accountType: '' }">
                                     <p class="block text-sm font-medium text-gray-700 mb-2">Tipe Akun</p>
                                     <div class="grid grid-cols-2 gap-4">
                                         <label
-                                            class="flex bg-orange-600 text-white font-medium items-center justify-center p-4 border rounded-lg cursor-pointer hover:bg-orange-900 transition duration-300">
-                                            <input type="radio" name="account_type" value="Employee" id="Employee"  required>
-                                            <span class="text-sm">Calon Magang</span>
+                                            class="relative flex items-center justify-center p-4 border rounded-lg cursor-pointer transition duration-300"
+                                            :class="{
+                                                'bg-orange-600 text-white hover:bg-orange-700': accountType === 'Employee',
+                                                'bg-orange-100 text-orange-600 hover:bg-orange-200': accountType !== 'Employee'
+                                            }"
+                                        >
+                                            <input type="radio" name="account_type" value="Employee" id="Employee" required x-model="accountType" class="hidden">
+                                            <span class="w-4 h-4 mr-2 border-2 rounded-full flex-shrink-0 flex items-center justify-center"
+                                                :class="{
+                                                    'border-white': accountType === 'Employee',
+                                                    'border-orange-600': accountType !== 'Employee'
+                                                }"
+                                            >
+                                                <span class="w-2 h-2 rounded-full"
+                                                    :class="{
+                                                        'bg-white': accountType === 'Employee',
+                                                        'bg-orange-600': accountType !== 'Employee'
+                                                    }"
+                                                    x-show="accountType === 'Employee'"
+                                                ></span>
+                                            </span>
+                                            <span class="text-sm font-medium">Calon Magang</span>
                                         </label>
                                         <label
-                                            class="flex bg-indigo-600 text-white font-medium items-center justify-center p-4 border rounded-lg cursor-pointer hover:bg-indigo-900 transition duration-300">
-                                            <input type="radio" name="account_type" value="Employer" id="Employer"  required>
-                                            <span class="text-sm">Penyedia Magang</span>
+                                            class="relative flex items-center justify-center p-4 border rounded-lg cursor-pointer transition duration-300"
+                                            :class="{
+                                                'bg-indigo-600 text-white hover:bg-indigo-700': accountType === 'Employer',
+                                                'bg-indigo-100 text-indigo-600 hover:bg-indigo-200': accountType !== 'Employer'
+                                            }"
+                                        >
+                                            <input type="radio" name="account_type" value="Employer" id="Employer" required x-model="accountType" class="hidden">
+                                            <span class="w-4 h-4 mr-2 border-2 rounded-full flex-shrink-0 flex items-center justify-center"
+                                                :class="{
+                                                    'border-white': accountType === 'Employer',
+                                                    'border-indigo-600': accountType !== 'Employer'
+                                                }"
+                                            >
+                                                <span class="w-2 h-2 rounded-full"
+                                                    :class="{
+                                                        'bg-white': accountType === 'Employer',
+                                                        'bg-indigo-600': accountType !== 'Employer'
+                                                    }"
+                                                    x-show="accountType === 'Employer'"
+                                                ></span>
+                                            </span>
+                                            <span class="text-sm font-medium">Penyedia Magang</span>
                                         </label>
                                     </div>
                                 </div>
-
-                                <!-- Tombol Kirim -->
                                 <button type="submit"
                                     class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-300 font-medium">
                                     Buat Akun

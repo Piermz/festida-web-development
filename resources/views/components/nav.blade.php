@@ -1,14 +1,14 @@
-<nav class="container max-w-7xl mx-auto flex items-center justify-between pt-6 relative">
+<nav x-data="{ isOpen: false }" class="container max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4 relative">
     <!-- Logo -->
     <a href="{{route('front.index')}}" class="flex shrink-0 z-20">
         <img src="{{asset('assets/logos/intern.png')}}" alt="Logo" class="h-10 w-auto">
     </a>
 
     <!-- Mobile Menu Button -->
-    <button id="mobileMenuBtn" class="lg:hidden z-20 p-2 text-[#1E40AF] hover:text-[#3B82F6]">
+    <button @click="isOpen = !isOpen" class="lg:hidden z-20 p-2 text-[#1E40AF] hover:text-[#3B82F6] focus:outline-none" aria-label="Toggle Menu">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path id="menuIcon" class="block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-            <path id="closeIcon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            <path x-show="!isOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            <path x-show="isOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
         </svg>
     </button>
 
@@ -48,25 +48,37 @@
     </ul>
 
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden lg:hidden fixed inset-0 bg-white bg-opacity-95 z-10">
-        <ul class="flex flex-col items-center justify-center h-full gap-8">
+    <div x-show="isOpen" x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95"
+         class="lg:hidden fixed inset-0 bg-white bg-opacity-95 z-10 flex items-center justify-center">
+        <ul class="flex flex-col items-center justify-center gap-8">
             <li>
-                <a href="{{route('front.index')}}"
+                <a @click="isOpen = false" href="{{route('front.index')}}"
                    class="text-xl transition-all duration-300 hover:text-[#3B82F6] {{request()->routeIs('front.index') ? 'text-[#3B82F6] font-semibold' : 'text-[#1E40AF]'}}">
                     Home
                 </a>
             </li>
             <li>
-                <a href="#features" class="text-xl transition-all duration-300 hover:text-[#3B82F6] text-[#1E40AF]">Features</a>
+                <a @click="isOpen = false" href="#features" class="text-xl transition-all duration-300 hover:text-[#3B82F6] text-[#1E40AF]">
+                    Features
+                </a>
             </li>
             <li>
-                <a href="#benefits" class="text-xl transition-all duration-300 hover:text-[#3B82F6] text-[#1E40AF]">Benefits</a>
+                <a @click="isOpen = false" href="#benefits" class="text-xl transition-all duration-300 hover:text-[#3B82F6] text-[#1E40AF]">
+                    Benefits
+                </a>
             </li>
             <li>
-                <a href="#stories" class="text-xl transition-all duration-300 hover:text-[#3B82F6] text-[#1E40AF]">Stories</a>
+                <a @click="isOpen = false" href="#stories" class="text-xl transition-all duration-300 hover:text-[#3B82F6] text-[#1E40AF]">
+                    Stories
+                </a>
             </li>
             <li>
-                <a href="#about" class="text-xl transition-all duration-300 hover:text-[#3B82F6] text-[#1E40AF]">About</a>
+                <a @click="isOpen = false" href="#about" class="text-xl transition-all duration-300 hover:text-[#3B82F6] text-[#1E40AF]">
+                    About
+                </a>
             </li>
         </ul>
     </div>
