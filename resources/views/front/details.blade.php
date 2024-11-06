@@ -87,7 +87,7 @@
                 <div class="flex items-center justify-between border-t pt-6">
                     <div class="flex items-center gap-2">
                         <img src="{{asset('assets/icons/security-user.svg')}}" alt="ikon" class="w-6 h-6">
-                        <span class="text-sm text-gray-600">Kami menggunakan keamanan untuk mengamankan data Anda 100%</span>
+                        <span class="text-sm text-gray-600">Kami menggunakan InternID untuk mengamankan data Anda 100%</span>
                     </div>
                     <div class="space-x-4">
                         <a href="#" class="px-6 py-2 border border-blue-600 text-blue-600 rounded-full hover:bg-blue-50 transition-colors">Simpan</a>
