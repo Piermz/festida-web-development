@@ -1,71 +1,86 @@
 @extends('layouts.master')
 @section('content')
-<body class="font-poppins text-[#0E0140] pb-[100px] overflow-x-hidden">
-    <div id="page-background" class="absolute h-[863px] w-full top-0 -z-10 overflow-hidden">
-        <img src="{{asset('assets//backgrounds/Group 2009.png')}}" class="w-full h-full object-fill" alt="background">
+<body class="font-poppins text-blue-900 bg-gray-100">
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute top-1/4 right-0 w-96 h-96 bg-yellow-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 -translate-y-1/2"></div>
     </div>
     <x-nav/>
-    <header class="container max-w-[1130px] mx-auto flex items-center justify-between gap-[50px] mt-[70px]">
-        <div class="flex flex-col gap-4 items-center w-full">
-            <h1 class="font-black text-[36px] leading-[70px] text-white text-center">{{ucfirst($category->name)}}</h1>
-        </div>  
+
+    <header class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <div class="text-center">
+            <h1 class="text-4xl tracking-tight font-extrabold text-blue-900 sm:text-5xl md:text-6xl">
+                Pekerjaan di Kategori: <span class="text-blue-600">{{ucfirst($category->name)}}</span>
+            </h1>
+        </div>
     </header>
-    
-    <section id="Result" class="container max-w-[1130px] mx-auto flex flex-col gap-[30px] mt-[70px] w-fit">
-        <div class="categories-container grid grid-cols-3 gap-[30px]">
 
-
-        @forelse ($category->jobs as $job)
-
-            <div class="card w-[300px] flex flex-col shrink-0 rounded-[20px] border border-[#E8E4F8] p-5 gap-5 bg-white shadow-[0_8px_30px_0_#0E01400D] hover:ring-2 hover:ring-[#FF6B2C] transition-all duration-300">
-                <div class="company-info flex items-center gap-3">
-                    <div class="w-[70px] flex shrink-0 overflow-hidden">
-                        <img src="{{Storage::url($job->company->logo)}}" class="object-contain w-full h-full" alt="logo">
-                    </div>
-                    <div class="flex flex-col">
-                            <p class="font-semibold">{{$job->company->name}}</p>
-                            <p class="text-sm leading-[21px]">Posted at {{$job->company->created_at->format('M d, Y')}}</p>
-                    </div>
+    <section id="Result" class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+        <h2 class="text-3xl font-extrabold text-blue-900 mb-8">Ditemukan {{$category->jobs->count()}} Pekerjaan</h2>
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            @forelse ($category->jobs as $job)
+            <div class="flex flex-col rounded-3xl shadow-lg overflow-hidden bg-white hover:shadow-2xl transition-all duration-300">
+                <div class="flex-shrink-0 p-6">
+                    <img class="h-12 w-12 object-contain" src="{{Storage::url($job->company->logo)}}" alt="{{$job->company->name}}">
                 </div>
-                <hr class="border-[#E8E4F8]">
-                <p class="job-title font-bold text-lg leading-[27px] h-[54px] flex shrink-0 line-clamp-2">{{$job->name}}</p>
-                <div class="job-info flex flex-col gap-[14px]">
-                    <div class="flex items-center gap-[6px]">
-                        <div class="flex shrink-0 w-6 h-6">
-                            <img src="{{asset('assets//icons/note-favorite-orange.svg')}}" alt="icon">
+                <div class="flex-1 bg-white p-6 flex flex-col justify-between">
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-blue-600">
+                            {{$job->company->name}}
+                        </p>
+                        <a href="{{route('front.details', $job->slug)}}" class="block mt-2">
+                            <p class="text-xl font-semibold text-blue-900">{{$job->name}}</p>
+                            <p class="mt-3 text-base text-gray-500">{{Str::limit($job->description, 100)}}</p>
+                        </a>
+                    </div>
+                    <div class="job-info flex flex-col gap-[14px] mt-4">
+                        <div class="flex items-center gap-[6px]">
+                            <div class="flex shrink-0 w-6 h-6">
+                                <img src="{{asset('assets/icons/note-favorite-orange.svg')}}" alt="ikon">
+                            </div>
+                            <p class="font-medium">{{$job->type}}</p>
                         </div>
-                        <p class="font-medium">{{$job->type}}</p>
-                    </div>
-                    <div class="flex items-center gap-[6px]">
-                        <div class="flex shrink-0 w-6 h-6">
-                            <img src="{{asset('assets//icons/moneys-cyan.svg')}}" alt="icon">
+                        <div class="flex items-center gap-[6px]">
+                            <div class="flex shrink-0 w-6 h-6">
+                                <img src="{{asset('assets/icons/moneys-cyan.svg')}}" alt="ikon">
+                            </div>
+                            <p class="font-medium">Terjamin</p>
                         </div>
-                        <p class="font-medium">Guaranteed</p>
-                    </div>
-                    <div class="flex items-center gap-[6px]">
-                        <div class="flex shrink-0 w-6 h-6">
-                            <img src="{{asset('assets//icons/location-purple.svg')}}" alt="icon">
+                        <div class="flex items-center gap-[6px]">
+                            <div class="flex shrink-0 w-6 h-6">
+                                <img src="{{asset('assets/icons/location-purple.svg')}}" alt="ikon">
+                            </div>
+                            <p class="font-medium">{{$job->location}}</p>
                         </div>
-                        <p class="font-medium">{{$job->location}}</p>
                     </div>
-                </div>
-                <hr class="border-[#E8E4F8]">
-                <div class="flex items-center justify-between">
-                    <div class="flex flex-col gap-[2px]">
-                        <p class="font-bold text-lg leading-[27px]">Rp {{ number_format($job->salary, 0, ',', '.') }}</p>
-                        <p class="text-sm leading-[21px]">/month</p>
+                    <div class="mt-6 flex items-center">
+                        <div class="flex-shrink-0">
+                            <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium {{ $job->type == 'Full-Time' ? 'bg-blue-100 text-blue-800' : ($job->type == 'Part-Time' ? 'bg-green-100 text-green-800' : 'bg-orange-100 text-orange-800') }}">
+                                {{$job->type}}
+                            </span>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-gray-900">
+                                Rp {{ number_format($job->salary, 0, ',', '.') }}/bulan
+                            </p>
+                            <p class="text-sm text-gray-500">
+                                {{$job->location}}
+                            </p>
+                        </div>
                     </div>
-                    <a href="{{route('front.details', $job->slug)}}" class="rounded-full p-[14px_24px] bg-[#FF6B2C] font-semibold text-white hover:shadow-[0_10px_20px_0_#FF6B2C66] transition-all duration-300">Details</a>
+                    <div class="mt-6">
+                        <a href="{{route('front.details', $job->slug)}}" class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            Lihat Detail
+                        </a>
+                    </div>
                 </div>
             </div>
-        @empty
-        <p>Belum ada data pekerjaan terkait</p>
-        @endforelse
-        </div> 
+            @empty
+            <p class="text-blue-900 text-lg col-span-3 text-center">Tidak ada pekerjaan ditemukan</p>
+            @endforelse
+        </div>
     </section>
-
-
-    </script>
 </body>
-
 @endsection
+

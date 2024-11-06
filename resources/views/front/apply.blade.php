@@ -1,91 +1,109 @@
 @extends('layouts.master')
 @section('content')
-<body class="font-poppins text-[#0E0140] pb-[100px] overflow-x-hidden">
-    <div id="page-background" class="absolute h-[533px] w-full top-0 -z-10 overflow-hidden">
-        <img src="{{asset('assets/backgrounds/Group 2009.png')}}" class="w-full h-full object-fill" alt="background">
+<body class="font-poppins text-gray-800 pb-[100px] overflow-x-hidden ">
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute top-1/4 right-0 w-96 h-96 bg-yellow-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 -translate-y-1/2"></div>
     </div>
     <x-nav/>
-    <form method="POST" enctype="multipart/form-data" action="{{route('front.apply.store', $companyJob->slug)}}" class="relative max-w-[900px] mx-auto flex flex-col rounded-[20px] bg-white border border-[#E8E4F8] p-[30px] gap-10 shadow-[0_8px_30px_0_#0E01400D] mt-[130px]">
-        @csrf
-        <div class="absolute -top-[60px] left-[50px] w-[120px] h-[120px] p-5 flex shrink-0 items-center justify-center bg-white rounded-[20px] border border-[#E8E4F8] shadow-[0_8px_30px_0_#0E01400D]">
-            <img src="{{Storage::url($companyJob->company->logo)}}" class="object-contain w-full h-full" alt="logo">
-        </div>
-        <div id="Title" class="flex flex-col pt-[60px] gap-[10px]">
-            @if($companyJob->is_open)
-                <p id="HiringBadge" class="rounded-full p-[8px_20px] bg-[#7521FF] font-bold text-white w-fit">WE’RE HIRING!</p>
-                @else
-               <p id="ClosedBadge" class="rounded-full p-[8px_20px] bg-[#FF2C39] font-bold text-white w-fit">CLOSED</p>
-               @endif
-            <h1 class="font-bold text-[32px] leading-[48px]">{{$companyJob->name}}</h1>
-            <p>{{$companyJob->category->name}} • Posted at {{$companyJob->company->created_at->format('M d, Y')}}</p>
-        </div>
-        <div id="Feature" class="flex items-center gap-6">
-            <div class="flex items-center gap-[6px]">
-                <div class="flex shrink-0 w-[38px] h-[38px]">
-                    <img src="{{asset('assets/icons/note-favorite-orange.svg')}}" alt="icon">
-                </div>
-                <p class="font-semibold text-lg leading-[27px]">{{$companyJob->type}}</p>
-            </div>
-            <div class="flex items-center gap-[6px]">
-                <div class="flex shrink-0 w-[38px] h-[38px]">
-                    <img src="{{asset('assets/icons/personalcard-yellow.svg')}}" alt="icon">
-                </div>
-                <p class="font-semibold text-lg leading-[27px]">{{$companyJob->skill_level}}</p>
-            </div>
-            <div class="flex items-center gap-[6px]">
-                <div class="flex shrink-0 w-[38px] h-[38px]">
-                    <img src="{{asset('assets/icons/moneys-cyan.svg')}}" alt="icon">
-                </div>
-                <p class="font-semibold text-lg leading-[27px]">Rp {{ number_format($companyJob->salary, 0, ',', '.') }}/mo</p>
-            </div>
-            <div class="flex items-center gap-[6px]">
-                <div class="flex shrink-0 w-[38px] h-[38px]">
-                    <img src="{{asset('assets/icons/location-purple.svg')}}" alt="icon">
-                </div>
-                <p class="font-semibold text-lg leading-[27px]">{{$companyJob->location}}</p>
+    <div class="max-w-4xl mx-auto mt-24 bg-white shadow-xl rounded-2xl overflow-hidden">
+        <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-12 px-10 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+            <div class="absolute -bottom-8 -left-8 w-64 h-64 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+            <div class="relative z-10">
+                <h1 class="text-4xl font-bold leading-tight mb-2">{{$companyJob->name}}</h1>
+                <p class="text-blue-100 text-lg flex items-center">
+                    <span class="mr-2">{{$companyJob->category->name}}</span>
+                    <span class="w-1.5 h-1.5 bg-blue-100 rounded-full mx-2"></span>
+                    <span>Diposting pada {{$companyJob->company->created_at->format('d M Y')}}</span>
+                    <img src="{{Storage::url($companyJob->company->logo)}}" class="object-contain w-12 h-12 ml-auto" alt="logo">
+                </p>
             </div>
         </div>
-        @if($errors->any())
-    <div class="bg-red-500 text-red-500 py-3 w-full alert alert-danger">
-        @foreach ($errors->all() as $error)
-            <p>{{ $error }}</p>
-        @endforeach
+
+        <form method="POST" enctype="multipart/form-data" action="{{route('front.apply.store', $companyJob->slug)}}" class="p-10">
+            @csrf
+            <div class="grid grid-cols-2 gap-6 mb-8">
+                <div class="flex items-center gap-3 bg-blue-50 p-4 rounded-lg">
+                    <div class="bg-blue-100 p-2 rounded-full">
+                        <img src="{{asset('assets/icons/note-favorite-orange.svg')}}" alt="icon" class="w-6 h-6">
+                    </div>
+                    <div>
+                        <p class="text-sm text-blue-600 font-medium">Tipe Pekerjaan</p>
+                        <p class="font-semibold">{{$companyJob->type}}</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 bg-blue-50 p-4 rounded-lg">
+                    <div class="bg-blue-100 p-2 rounded-full">
+                        <img src="{{asset('assets/icons/personalcard-yellow.svg')}}" alt="icon" class="w-6 h-6">
+                    </div>
+                    <div>
+                        <p class="text-sm text-blue-600 font-medium">Tingkat Keahlian</p>
+                        <p class="font-semibold">{{$companyJob->skill_level}}</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 bg-blue-50 p-4 rounded-lg">
+                    <div class="bg-blue-100 p-2 rounded-full">
+                        <img src="{{asset('assets/icons/moneys-cyan.svg')}}" alt="icon" class="w-6 h-6">
+                    </div>
+                    <div>
+                        <p class="text-sm text-blue-600 font-medium">Gaji</p>
+                        <p class="font-semibold">Rp {{ number_format($companyJob->salary, 0, ',', '.') }}/bulan</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 bg-blue-50 p-4 rounded-lg">
+                    <div class="bg-blue-100 p-2 rounded-full">
+                        <img src="{{asset('assets/icons/location-purple.svg')}}" alt="icon" class="w-6 h-6">
+                    </div>
+                    <div>
+                        <p class="text-sm text-blue-600 font-medium">Lokasi</p>
+                        <p class="font-semibold">{{$companyJob->location}}</p>
+                    </div>
+                </div>
+            </div>
+
+            @if($errors->any())
+                <div class="bg-red-100 text-red-600 p-4 rounded-lg mb-6">
+                    @foreach ($errors->all() as $error)
+                        <p class="mb-1">{{ $error }}</p>
+                    @endforeach
+                </div>
+            @endif
+
+            <div class="mb-6">
+                <label for="coverLetter" class="block text-sm font-medium text-gray-700 mb-2">Surat Lamaran</label>
+                <textarea name="massage" id="coverLetter" rows="6" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out" placeholder="Ceritakan keterampilan dan pengalaman hebat Anda" required></textarea>
+            </div>
+
+            <div class="mb-6">
+                <label for="fileInput" class="block text-sm font-medium text-gray-700 mb-2">Unggah CV</label>
+                <div class="relative">
+                    <input type="file" name="resume" id="fileInput" class="hidden" accept=".pdf" required>
+                    <label for="fileInput" class="cursor-pointer flex items-center justify-center w-full p-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition duration-150 ease-in-out">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                        <span id="fileLabel">Pilih file PDF</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between">
+                <div class="flex items-center text-sm text-gray-500">
+                    <svg class="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    Data Anda aman 100% dengan Angga
+                </div>
+                <button type="submit" class="bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150 ease-in-out">
+                    Kirim Lamaran
+                </button>
+            </div>
+        </form>
     </div>
-@endif
 
-        <div id="Cover-Letter-Container" class="flex flex-col gap-4">
-            <p class="font-semibold text-xl leading-[30px]">Write Best Cover Letter</p>
-            <div class="flex rounded-[20px] bg-white ring-1 ring-[#0E0140] p-[14px_24px] gap-[10px] focus-within:ring-2 focus-within:ring-[#FF6B2C] transition-all duration-300">
-                <div class="w-6 h-5 flex shrink-0 mt-[2px]">
-                    <img src="{{asset('assets/icons/award.svg')}}" alt="icon">
-                </div>
-                <textarea name="massage" id="coverLetter" rows="9" class="appearance-none outline-none w-full font-semibold placeholder:text-[#0E0140]" placeholder="Tell your great skills and experiences" required></textarea>
-            </div>
-        </div>
-        <div id="Resume-Container" class="flex flex-col gap-4">
-            <p class="font-semibold text-xl leading-[30px]">Complete Your Profile</p>
-            <div class="relative flex rounded-[20px] bg-white ring-1 ring-[#0E0140] p-[14px_24px] gap-[10px] focus-within:ring-2 focus-within:ring-[#FF6B2C] transition-all duration-300">
-                <div class="w-6 h-5 flex shrink-0 mt-[2px]">
-                    <img src="{{asset('assets/icons/brifecase-tick.svg')}}" alt="icon">
-                </div>
-                <button type="button" id="fileButton" class="font-semibold w-full text-left outline-none" onclick="document.getElementById('fileInput').click();">Add your resume .PDF</button>
-                <input type="file" name="resume" id="fileInput" class="absolute top-1/2 -z-10" accept=".pdf" required></input>
-            </div>
-        </div>
-        <hr class="border-[#E8E4F8]">
-        <div id="CTA" class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <div class="w-6 h-6 flex shrink-0">
-                    <img src="{{asset('assets/icons/security-user.svg')}}" alt="icon">
-                </div>
-                <p class="font-semibold">We use Angga to secure your data 100%</p>
-            </div>
-            <div class="flex items-center gap-3">
-                <button type="submit" class="rounded-full p-[14px_24px] bg-[#FF6B2C] font-semibold text-white hover:shadow-[0_10px_20px_0_#FF6B2C66] transition-all duration-300">Submit My Application</button>
-            </div>
-        </div>
-    </form>
-
-    <script src="{{asset('js/fileInput.js')}}"></script>
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            var fileName = e.target.files[0].name;
+            document.getElementById('fileLabel').textContent = fileName;
+        });
+    </script>
 </body>
 @endsection

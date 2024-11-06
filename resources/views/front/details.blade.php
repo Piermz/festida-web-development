@@ -1,202 +1,126 @@
 @extends('layouts.master')
 @section('content')
-<body class="font-poppins text-[#0E0140] pb-[100px] overflow-x-hidden">
-    <div id="page-background" class="absolute h-[533px] w-full top-0 -z-10 overflow-hidden">
-        <img src="{{asset('assets/backgrounds/Group 2009.png')}}" class="w-full h-full object-fill" alt="background">
+<body class="font-poppins text-blue-900 bg-gray-100">
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute top-1/4 right-0 w-96 h-96 bg-yellow-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 -translate-y-1/2"></div>
     </div>
     <x-nav/>
-    <article id="Details" class="max-w-[900px] mx-auto flex flex-col rounded-[20px] bg-white border border-[#E8E4F8] p-[30px] gap-10 shadow-[0_8px_30px_0_#0E01400D] mt-[70px]">
-        <div id="Cover" class="w-full relative">
-            <div class="w-full aspect-[840/300] bg-[#D9D9D9] rounded-[20px] overflow-hidden">
-                <img src="{{Storage::url($companyJob->thumbnail)}}" class="object-cover w-full h-full" alt="cover image">
-            </div>
-            <div class="absolute transform translate-y-1/2 bottom-0 left-5 w-[120px] h-[120px] p-5 flex shrink-0 items-center justify-center bg-white rounded-[20px] border border-[#E8E4F8] shadow-[0_8px_30px_0_#0E01400D]">
-                <img src="{{Storage::url($companyJob->company->logo)}}" class="object-contain w-full h-full" alt="logo">
-            </div>
-            <div class="absolute transform translate-y-1/2 bottom-0 right-5">
-                @if($companyJob->is_open)
-                <p id="HiringBadge" class="rounded-full p-[8px_20px] bg-[#7521FF] font-bold text-white w-fit">WE’RE HIRING!</p>
-                @else
-               <p id="ClosedBadge" class="rounded-full p-[8px_20px] bg-[#FF2C39] font-bold text-white w-fit">CLOSED</p>
-               @endif
-                
-            </div>
-        </div>
-        <div id="Title" class="flex flex-col mt-[90px] gap-[10px]">
-            <h1 class="font-bold text-[32px] leading-[48px]">{{$companyJob->name}}</h1>
-            <p>{{$companyJob->category->name}} • Posted at {{$companyJob->company->created_at->format('M d, Y')}}</p>
-        </div>
-        <div id="Feature" class="flex items-center gap-6">
-            <div class="flex items-center gap-[6px]">
-                <div class="flex shrink-0 w-[38px] h-[38px]">
-                    <img src="{{asset('assets/icons/note-favorite-orange.svg')}}" alt="icon">
+
+    <article class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="bg-white shadow-lg rounded-3xl overflow-hidden">
+            <div class="relative">
+                <img src="{{Storage::url($companyJob->thumbnail)}}" class="w-full h-80 object-cover" alt="gambar sampul">
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
+                    <h1 class="text-4xl font-bold text-white">{{$companyJob->name}}</h1>
+                    <p class="text-white mt-3 text-lg">{{$companyJob->category->name}} • Diposting pada {{$companyJob->company->created_at->format('d M Y')}}</p>
                 </div>
-                <p class="font-semibold text-lg leading-[27px]">{{$companyJob->type}}</p>
-            </div>
-            <div class="flex items-center gap-[6px]">
-                <div class="flex shrink-0 w-[38px] h-[38px]">
-                    <img src="{{asset('assets/icons/personalcard-yellow.svg')}}" alt="icon">
+                <div class="absolute top-8 right-8">
+                    @if($companyJob->is_open)
+                    <span class="bg-green-500 text-white px-6 py-3 rounded-full font-semibold text-lg">SEDANG MEREKRUT!</span>
+                    @else
+                    <span class="bg-red-500 text-white px-6 py-3 rounded-full font-semibold text-lg">DITUTUP</span>
+                    @endif
                 </div>
-                <p class="font-semibold text-lg leading-[27px]">{{$companyJob->skill_level}}</p>
             </div>
-            <div class="flex items-center gap-[6px]">
-                <div class="flex shrink-0 w-[38px] h-[38px]">
-                    <img src="{{asset('assets/icons/moneys-cyan.svg')}}" alt="icon">
-                </div>
-                <p class="font-semibold text-lg leading-[27px]">Rp {{ number_format($companyJob->salary, 0, ',', '.') }}/mo</p>
-            </div>
-            <div class="flex items-center gap-[6px]">
-                <div class="flex shrink-0 w-[38px] h-[38px]">
-                    <img src="{{asset('assets/icons/location-purple.svg')}}" alt="icon">
-                </div>
-                <p class="font-semibold text-lg leading-[27px]">{{$companyJob->location}}</p>
-            </div>
-        </div>
-        <div id="Overview" class="flex flex-col gap-[10px]">
-            <h2 class="font-semibold text-xl leading-[30px]">Overview</h2>
-            <p class="text-lg leading-[34px]">{{$companyJob->about}}</p>
-        </div>
-        <div id="Responsibilities" class="flex flex-col gap-[10px]">
-            <h2 class="font-semibold text-xl leading-[30px]">Responsibilities</h2>
-            <div class="flex flex-col gap-5">
-                @foreach ($companyJob->responsibilities as $responsibility)
-                <div class="flex items-center gap-2">
-                    <div class="flex shrink-0">
-                        <img src="{{asset('assets/icons/tick-circle.svg')}}" alt="tick icon">
+
+            <div class="p-6 space-y-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="flex flex-col items-center p-4 bg-blue-50 rounded-lg">
+                        <img src="{{asset('assets/icons/note-favorite-orange.svg')}}" alt="Jenis Pekerjaan" class="w-10 h-10 mb-2">
+                        <span class="text-sm font-medium text-gray-600">Jenis Pekerjaan</span>
+                        <span class="text-lg font-semibold text-blue-800">{{$companyJob->type}}</span>
                     </div>
-                    <p>{{$responsibility->name}}</p>
-                </div>
-                @endforeach
-            </div>
-        </div>
-        <div id="Qualifications" class="flex flex-col gap-[10px]">
-            <h2 class="font-semibold text-xl leading-[30px]">Qualifications</h2>
-            <div class="flex flex-col gap-5">
-                @foreach ($companyJob->Qualifications as $Qualification)
-                <div class="flex items-center gap-2">
-                    <div class="flex shrink-0">
-                        <img src="{{asset('assets/icons/tick-circle.svg')}}" alt="tick icon">
+                    <div class="flex flex-col items-center p-4 bg-yellow-50 rounded-lg">
+                        <img src="{{asset('assets/icons/personalcard-yellow.svg')}}" alt="Pengalaman" class="w-10 h-10 mb-2">
+                        <span class="text-sm font-medium text-gray-600">Pengalaman</span>
+                        <span class="text-lg font-semibold text-yellow-800">{{$companyJob->skill_level}}</span>
                     </div>
-                    <p>{{$Qualification->name}}</p>
-                </div>
-                @endforeach
-            </div>
-        </div>
-        <div id="Company" class="flex flex-col gap-[10px]">
-            <h2 class="font-semibold text-xl leading-[30px]">Company</h2>
-            <div class="flex flex-col gap-5">
-                <div class="flex items-center gap-5">
-                    <div class="company-logo w-[70px] flex shrink-0">
-                        <img src="{{Storage::url($companyJob->company->logo)}}" class="object-contain" alt="icon">
+                    <div class="flex flex-col items-center p-4 bg-cyan-50 rounded-lg">
+                        <img src="{{asset('assets/icons/moneys-cyan.svg')}}" alt="Gaji" class="w-10 h-10 mb-2">
+                        <span class="text-sm font-medium text-gray-600">Gaji</span>
+                        <span class="text-lg font-semibold text-cyan-800">Rp {{ number_format($companyJob->salary, 0, ',', '.') }}/bulan</span>
                     </div>
-                    <div class="flex flex-col gap-[2px]">
-                        <div class="CompanyName font-semibold flex items-center gap-[2px]">
-                            <p class="font-semibold">{{$companyJob->company->name}}</p>
-                            <div class="w-6 h-6 flex shrink-0">
-                                <img src="{{asset('assets/icons/verify.svg')}}" alt="verified"> 
-                            </div>
+                    <div class="flex flex-col items-center p-4 bg-purple-50 rounded-lg">
+                        <img src="{{asset('assets/icons/location-purple.svg')}}" alt="Lokasi" class="w-10 h-10 mb-2">
+                        <span class="text-sm font-medium text-gray-600">Lokasi</span>
+                        <span class="text-lg font-semibold text-purple-800">{{$companyJob->location}}</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-semibold mb-4">Ringkasan</h2>
+                    <p class="text-gray-700">{{$companyJob->about}}</p>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-semibold mb-4">Tanggung Jawab</h2>
+                    <ul class="list-disc pl-5 space-y-2">
+                        @foreach ($companyJob->responsibilities as $responsibility)
+                        <li>{{$responsibility->name}}</li>
+                        @endforeach
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-semibold mb-4">Kualifikasi</h2>
+                    <ul class="list-disc pl-5 space-y-2">
+                        @foreach ($companyJob->Qualifications as $Qualification)
+                        <li>{{$Qualification->name}}</li>
+                        @endforeach
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-semibold mb-4">Perusahaan</h2>
+                    <div class="flex items-center gap-4 mb-4">
+                        <img src="{{Storage::url($companyJob->company->logo)}}" class="w-16 h-16 object-contain" alt="logo perusahaan">
+                        <div>
+                            <h3 class="text-xl font-semibold">{{$companyJob->company->name}}</h3>
+                            <p class="text-gray-600">{{$companyJob->company->jobs->count()}} Pekerjaan</p>
                         </div>
-                        <p class="text-sm leading-[21px]">{{$companyJob->company->jobs->count()}} Jobs</p>
+                    </div>
+                    <p class="text-gray-700">{{$companyJob->company->about}}</p>
+                </div>
+
+                <div class="flex items-center justify-between border-t pt-6">
+                    <div class="flex items-center gap-2">
+                        <img src="{{asset('assets/icons/security-user.svg')}}" alt="ikon" class="w-6 h-6">
+                        <span class="text-sm text-gray-600">Kami menggunakan keamanan untuk mengamankan data Anda 100%</span>
+                    </div>
+                    <div class="space-x-4">
+                        <a href="#" class="px-6 py-2 border border-blue-600 text-blue-600 rounded-full hover:bg-blue-50 transition-colors">Simpan</a>
+                        <a href="{{route('front.apply', $companyJob->slug)}}" class="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">Lamar Sekarang</a>
                     </div>
                 </div>
-                <p class="leading-[28px]">{{$companyJob->company->about}}</p>
-            </div>
-        </div>
-        <hr class="border-[#E8E4F8]">
-        <div id="CTA" class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <div class="w-6 h-6 flex shrink-0">
-                    <img src="{{asset('assets/icons/security-user.svg')}}" alt="icon">
-                </div>
-                <p class="font-semibold">We use Angga to secure your data 100%</p>
-            </div>
-            <div class="flex items-center gap-3">
-                <a href="" class="rounded-full border border-[#0E0140] p-[14px_24px] font-semibold text-[#0E0140]">Bookmark</a>
-                <a href="{{route('front.apply', $companyJob->slug)}}" class="rounded-full p-[14px_24px] bg-[#FF6B2C] font-semibold text-white hover:shadow-[0_10px_20px_0_#FF6B2C66] transition-all duration-300">Apply Now</a>
             </div>
         </div>
     </article>
-    <section id="Latest" class="flex flex-col gap-[30px] mt-[70px]">
-        <h2 class="container max-w-[1130px] mx-auto font-bold text-2xl leading-[36px]">Other Jobs You <br> Might Interested</h2>
-        <div class="main-carousel *:!overflow-visible">
 
-            @forelse($jobs as $job)
-            <div class="card first-of-type:pl-[calc((100%-1130px)/2)] last-of-type:pr-[calc((100%-1130px)/2)] px-[15px] py-[2px]">
-                <div class="w-[300px] flex flex-col shrink-0 rounded-[20px] border border-[#E8E4F8] p-5 gap-5 bg-white shadow-[0_8px_30px_0_#0E01400D] hover:ring-2 hover:ring-[#FF6B2C] transition-all duration-300">
-                    <div class="company-info flex items-center gap-3">
-                        <div class="w-[70px] flex shrink-0 overflow-hidden">
-                            <img src="{{Storage::url($job->company->logo)}}" class="object-contain w-full h-full" alt="logo">
-                        </div>
-                        <div class="flex flex-col">
-                            <p class="font-semibold">{{$job->company->name}}</p>
-                            <p class="text-sm leading-[21px]">Posted at {{$job->company->created_at->format('M d, Y')}}</p>
-                        </div>
-                    </div>
-                    <hr class="border-[#E8E4F8]">
-                    <p class="job-title font-bold text-lg leading-[27px] h-[54px] flex shrink-0 line-clamp-2">{{$job->name}}</p>
-                    <div class="job-info flex flex-col gap-[14px]">
-                        <div class="flex items-center gap-[6px]">
-                            <div class="flex shrink-0 w-6 h-6">
-                                <img src="{{asset('assets/icons/note-favorite-orange.svg')}}" alt="icon">
-                            </div>
-                            <p class="font-medium">{{$job->type}}</p>
-                        </div>
-                        <div class="flex items-center gap-[6px]">
-                            <div class="flex shrink-0 w-6 h-6">
-                                <img src="{{asset('assets/icons/moneys-cyan.svg')}}" alt="icon">
-                            </div>
-                            <p class="font-medium">Guaranteed</p>
-                        </div>
-                        <div class="flex items-center gap-[6px]">
-                            <div class="flex shrink-0 w-6 h-6">
-                                <img src="{{asset('assets/icons/location-purple.svg')}}" alt="icon">
-                            </div>
-                            <p class="font-medium">{{$job->location}}</p>
+    <section class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+        <h2 class="text-3xl font-bold mb-8">Pekerjaan Lain yang Mungkin Anda Minati</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            @foreach($jobs as $job)
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <img src="{{Storage::url($job->company->logo)}}" class="w-12 h-12 object-contain mr-4" alt="logo perusahaan">
+                        <div>
+                            <h3 class="font-semibold text-lg">{{$job->company->name}}</h3>
+                            <p class="text-gray-600 text-sm">{{$job->location}}</p>
                         </div>
                     </div>
-                    <hr class="border-[#E8E4F8]">
-                    <div class="flex items-center justify-between">
-                        <div class="flex flex-col gap-[2px]">
-                            <p class="font-bold text-lg leading-[27px]">Rp {{ number_format($job->salary, 0, ',', '.') }}</p>
-                            <p class="text-sm leading-[21px]">/month</p>
-                        </div>
-                        <a href="{{route('front.details', $job->slug)}}" class="rounded-full p-[14px_24px] bg-[#FF6B2C] font-semibold text-white hover:shadow-[0_10px_20px_0_#FF6B2C66] transition-all duration-300">Details</a>
+                    <h4 class="text-xl font-bold mb-2">{{$job->name}}</h4>
+                    <p class="text-gray-600 mb-4">{{Str::limit($job->description, 100)}}</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-blue-600 font-semibold">Rp {{ number_format($job->salary, 0, ',', '.') }}/bulan</span>
+                        <a href="{{route('front.details', $job->slug)}}" class="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">Lihat Detail</a>
                     </div>
                 </div>
             </div>
-            @empty
-            <p>Belum ada data job baru</p>
-            @endforelse
+            @endforeach
         </div>
     </section>
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <!-- JavaScript -->
-    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-
-    <script>
-        $('.main-carousel').flickity({
-            // options
-            cellAlign: 'left',
-            contain: true,
-            prevNextButtons: false,
-            pageDots: false
-        });
-    </script>
 </body>
 @endsection
-@push('after-scripts')
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<!-- JavaScript -->
-<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-
-<script>
-    $('.main-carousel').flickity({
-        // options
-        cellAlign: 'left',
-        contain: true,
-        prevNextButtons: false,
-        pageDots: false
-    });
-</script>
-@endpush

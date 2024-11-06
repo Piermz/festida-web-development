@@ -1,55 +1,27 @@
 @extends('layouts.master')
+
 @section('content')
-<body class="font-poppins text-[#0E0140] pb-[100px] overflow-x-hidden bg-[#0E0140] min-h-screen flex flex-col">
-    <nav class="container max-w-[1130px] mx-auto flex items-center justify-between pt-10">
-        <a href="index.html" class="flex shrink-0">
-            <img src="{{asset('assets/logos/Logo.svg')}}" alt="Logo">
-        </a>
-        <ul class="flex items-center gap-10">
-            <li>
-                <a href="index.html" class="transition-all duration-300 hover:font-semibold hover:text-[#FF6B2C] font-medium text-white">Home</a>
-            </li>
-            <li>
-                <a href="" class="transition-all duration-300 hover:font-semibold hover:text-[#FF6B2C] font-medium text-white">Features</a>
-            </li>
-            <li>
-                <a href="" class="transition-all duration-300 hover:font-semibold hover:text-[#FF6B2C] font-medium text-white">Benefits</a>
-            </li>
-            <li>
-                <a href="" class="transition-all duration-300 hover:font-semibold hover:text-[#FF6B2C] font-medium text-white">Stories</a>
-            </li>
-            <li>
-                <a href="" class="transition-all duration-300 hover:font-semibold hover:text-[#FF6B2C] font-medium text-white">About</a>
-            </li>
-        </ul>
-        @guest
-        <div class="flex items-center gap-3">
-            <a href="{{route('login')}}" class="rounded-full border border-white p-[14px_24px] font-semibold text-white">Sign In</a>
-            <a href="{{route('register')}}" class="rounded-full p-[14px_24px] bg-[#FF6B2C] font-semibold text-white hover:shadow-[0_10px_20px_0_#FF6B2C66] transition-all duration-300">Sign up</a>
-        </div>   
-        @endguest
-        @auth
-        <div class="flex items-center gap-4">
-            <p class="username font-medium text-white">Hi, {{Auth::user()->name}}</p>
-            <div class="w-[52px] h-[52px] flex shrink-0 rounded-full overflow-hidden">
-                <a href="{{route('dashboard')}}">
-                    <img src="{{Storage::url(Auth::user()->avatar)}}" class="object-cover w-full h-full" alt="photo">
-                </a>
-            </div>
-        </div>
-        @endauth
-    </nav>
-    <div class="flex-1 flex items-center justify-center">
-        <div id="Success" class="flex flex-col items-center justify-center gap-[30px] my-auto">
-            <div class="flex shrink-0 w-[330px] h-[330px]">
-                <img src="{{asset('assets/backgrounds/success illustration.png')}}" class="object-contain" alt="cover image">
-            </div>
-            <div class="flex flex-col gap-[14px] text-center max-w-[389px]">
-                <p class="font-semibold text-[32px] leading-[48px] text-white">Well, Great Work!</p>
-                <p class="leading-[26px] text-white">We have received your application and the recruiter will review in a couple business days</p>
-            </div>
-            <a href="{{route('front.index')}}" class="rounded-full p-[14px_24px] bg-[#FF6B2C] font-semibold text-white hover:shadow-[0_10px_20px_0_#FF6B2C66] transition-all duration-300">Explore Other Jobs</a>
-        </div>
+<body class="font-poppins text-[#0E0140] pb-[100px] overflow-x-hidden  min-h-screen flex flex-col">
+    <x-nav/>
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute top-1/4 right-0 w-96 h-96 bg-yellow-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 -translate-y-1/2"></div>
     </div>
-</body>
+    <div class="flex-1 flex items-center justify-center px-4">
+        <div class="flex flex-col items-center justify-center gap-8">
+            <div class="w-48 h-48 rounded-full bg-blue-600 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <div class="text-center">
+                <h2 class="text-3xl font-bold text-[#0E0140] mb-4">Kerja Bagus!</h2>
+                <p class="text-lg text-gray-600 mb-8">Kami telah menerima lamaran Anda dan rekruter akan meninjau dalam beberapa hari kerja.</p>
+            </div>
+            <a href="{{ route('front.index') }}" class="w-full rounded-full py-4 px-6 bg-blue-600 font-semibold text-white text-center text-lg hover:shadow-lg transition-all duration-300">
+                Jelajahi Pekerjaan Lain
+            </a>
+        </div>
+    </div></body>
 @endsection
