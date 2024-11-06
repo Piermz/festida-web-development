@@ -101,7 +101,7 @@
             </h2>
 
             <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                @forelse($jobs as $job)
+                @forelse($jobs->take(6) as $job)
                     <div class="flex flex-col rounded-3xl shadow-lg overflow-hidden bg-white hover:shadow-2xl transition-all duration-300">
                         <div class="flex-shrink-0 p-6 bg-gray-50 relative">
                             <img class="h-12 w-12 object-contain" src="{{ Storage::url($job->company->logo) }}" alt="{{ $job->company->name }}">
